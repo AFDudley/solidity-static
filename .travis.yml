@@ -4,11 +4,6 @@ dist: trusty
 services:
   - docker
 
-before_install:
-  - docker pull busybox
-  - docker pull base/archlinux
-  - docker pull centos:5
-
 install:
   - docker build --rm --file=Dockerfile --tag=rainbeam/solidity-static .
   # create a container to copy files from (can't copy from an image)
@@ -17,10 +12,7 @@ install:
   - docker cp ${tmp_container}:/usr/local/bin/soltest .
 
 script:
-  - ./soltest
-  - docker run -v `pwd`:`pwd` -it busybox `pwd`/soltest
-  - docker run -v `pwd`:`pwd` -it base/archlinux `pwd`/soltest
-  - docker run -v `pwd`:`pwd` -it centos:5 `pwd`/soltest
+  - echo "no script"
 
 deploy:
   provider: releases
